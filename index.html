@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Naksh Official</title>
+
   <style>
     :root{
       --bg1:#060912;
@@ -15,8 +16,11 @@
       --accent:rgba(120,170,255,.95);
       --shadow: 0 16px 45px rgba(0,0,0,.45);
       --radius: 18px;
+      --glow: 0 0 0 1px rgba(120,170,255,.25), 0 14px 40px rgba(120,170,255,.12);
     }
+
     *{box-sizing:border-box}
+
     body{
       margin:0;
       min-height:100vh;
@@ -31,9 +35,9 @@
       justify-content:center;
       padding:24px;
     }
-    .wrap{
-      width:min(920px, 100%);
-    }
+
+    .wrap{ width:min(980px, 100%); }
+
     .card{
       background:var(--card);
       border:1px solid var(--border);
@@ -41,25 +45,52 @@
       box-shadow:var(--shadow);
       padding:28px;
       backdrop-filter: blur(10px);
+      overflow:hidden;
+      position:relative;
+      animation: fadeUp .55s ease both;
     }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(600px 240px at 20% 0%, rgba(120,170,255,.25), transparent 60%),
+                  radial-gradient(600px 240px at 80% 20%, rgba(100,255,200,.14), transparent 60%);
+      opacity:.55;
+      pointer-events:none;
+      filter: blur(6px);
+    }
+
+    .content{ position:relative; }
+
+    @keyframes fadeUp{
+      from{opacity:0; transform: translateY(10px);}
+      to{opacity:1; transform: translateY(0);}
+    }
+
     h1{
       margin:0 0 10px;
       font-size: clamp(28px, 4vw, 42px);
       letter-spacing:.2px;
     }
+
     p{
       margin:0 0 18px;
       color:var(--muted);
-      line-height:1.5;
+      line-height:1.55;
       font-size: 15.5px;
     }
+
     .nav{
       display:grid;
       grid-template-columns: repeat(2, 1fr);
       gap:12px;
       margin-top:14px;
     }
-    a.btn{
+
+    a.btn, button.btn{
+      appearance:none;
+      cursor:pointer;
       text-decoration:none;
       color:var(--text);
       border:1px solid var(--border);
@@ -70,41 +101,193 @@
       align-items:center;
       justify-content:center;
       gap:10px;
-      font-weight:600;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      font-weight:700;
+      transition: transform .14s ease, background .14s ease, border-color .14s ease, box-shadow .14s ease;
     }
-    a.btn:hover{
+
+    a.btn:hover, button.btn:hover{
       transform: translateY(-2px);
       background: rgba(120,170,255,.12);
       border-color: rgba(120,170,255,.35);
+      box-shadow: var(--glow);
     }
+
+    .row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
+    .pill{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      padding:10px 12px;
+      border-radius:999px;
+      color: rgba(255,255,255,.82);
+      font-weight:650;
+      font-size:13px;
+      transition: background .14s ease, border-color .14s ease, transform .14s ease;
+    }
+    .pill:hover{
+      background: rgba(255,255,255,.07);
+      border-color: rgba(120,170,255,.35);
+      transform: translateY(-1px);
+    }
+
+    hr{
+      border:0;
+      border-top:1px solid rgba(255,255,255,.12);
+      margin:22px 0;
+    }
+
+    .sectionTitle{
+      margin:0 0 8px;
+      font-size:16px;
+      letter-spacing:.2px;
+    }
+
+    .form{
+      max-width:680px;
+      margin:0 auto;
+      text-align:center;
+    }
+
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(10, 18, 36, .55);
+      color: var(--text);
+      outline:none;
+      font-size:14px;
+    }
+    textarea{ min-height:120px; resize:vertical; }
+
+    input:focus, textarea:focus{
+      border-color: rgba(120,170,255,.55);
+      box-shadow: 0 0 0 3px rgba(120,170,255,.14);
+    }
+
     .small{
       margin-top:14px;
       font-size:13px;
       color:rgba(255,255,255,.55);
       text-align:center;
     }
+
+    .tiny{
+      font-size:12px;
+      color:rgba(255,255,255,.55);
+      line-height:1.4;
+      margin-top:8px;
+    }
+
     @media (max-width:720px){
       .nav{ grid-template-columns: 1fr; }
+      .grid2{ grid-template-columns: 1fr; }
     }
   </style>
 </head>
+
 <body>
   <main class="wrap">
     <section class="card">
-      <h1>🚀 Hi, I’m Naksh</h1>
-      <p>
-        Welcome to my official portfolio site. This is where I’ll share my achievements,
-        projects, and learning journey. (More features coming soon.)
-      </p>
+      <div class="content">
+        <h1>🚀 Hi, I’m Naksh</h1>
+        <p>
+          Welcome to my official portfolio site. This is where I’ll share my achievements,
+          projects, and learning journey. (More features coming soon.)
+        </p>
 
-      <div class="nav">
-        <a class="btn" href="portfolio.html">📌 Portfolio</a>
-        <a class="btn" href="contact.html">📫 Contact</a>
+        <div class="nav">
+          <a class="btn" href="portfolio.html">📌 Portfolio</a>
+          <a class="btn" href="contact.html">📫 Contact</a>
+        </div>
+
+        <div class="row" aria-label="Quick tags">
+          <span class="pill">STEM</span>
+          <span class="pill">Builder</span>
+          <span class="pill">Weather</span>
+          <span class="pill">Speedcubing</span>
+          <span class="pill">Portfolio in progress</span>
+        </div>
+
+        <hr>
+
+        <h2 class="sectionTitle">💡 Suggestions or Questions?</h2>
+        <p style="text-align:center; margin-bottom:10px;">
+          Send ideas, feedback, or questions directly to me.
+        </p>
+
+        <!-- This opens the visitor's email app and sends to your school email -->
+        <form class="form" id="suggestForm">
+          <div class="grid2">
+            <input id="name" type="text" placeholder="Your name (optional)">
+            <input id="subject" type="text" placeholder="Subject (optional)">
+          </div>
+          <div style="margin-top:10px;">
+            <textarea id="message" placeholder="Type your message here..."></textarea>
+          </div>
+
+          <div class="nav" style="grid-template-columns: 1fr 1fr; margin-top:12px;">
+            <button class="btn" type="button" id="sendBtn">✉️ Send Message</button>
+            <button class="btn" type="button" id="copyBtn">📋 Copy Email</button>
+          </div>
+
+          <div class="tiny">
+            Note: Clicking “Send Message” opens your email app (Gmail/Apple Mail) with the message filled in.
+          </div>
+        </form>
+
+        <div class="small">Built with GitHub Pages • Updated often</div>
       </div>
-
-      <div class="small">Built with GitHub Pages • Updated often</div>
     </section>
   </main>
+
+  <script>
+    // Email target (school)
+    const emailTo = "1086939@gmail.com";
+
+    const nameEl = document.getElementById("name");
+    const subjectEl = document.getElementById("subject");
+    const messageEl = document.getElementById("message");
+
+    document.getElementById("sendBtn").addEventListener("click", () => {
+      const name = (nameEl.value || "").trim();
+      const subject = (subjectEl.value || "").trim();
+      const msg = (messageEl.value || "").trim();
+
+      const finalSubject = subject ? subject : "Suggestion / Question from my website";
+      const bodyLines = [
+        name ? `Name: ${name}` : "",
+        "",
+        msg ? msg : "(No message typed yet)"
+      ].filter(line => line !== "");
+
+      const mailto = `mailto:${encodeURIComponent(emailTo)}?subject=${encodeURIComponent(finalSubject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+      window.location.href = mailto;
+    });
+
+    document.getElementById("copyBtn").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(emailTo);
+        const btn = document.getElementById("copyBtn");
+        const old = btn.textContent;
+        btn.textContent = "✅ Copied!";
+        setTimeout(() => btn.textContent = old, 900);
+      } catch (e) {
+        alert("Copy didn’t work on this browser. Email: " + emailTo);
+      }
+    });
+  </script>
 </body>
 </html>
