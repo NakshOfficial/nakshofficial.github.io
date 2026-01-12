@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Naksh — Portfolio</title>
+  <style>
+    :root{
+      --bg1:#070b14; --bg2:#0a1222;
+      --card:#0e1a2f; --card2:#0c1629;
+      --text:#e8eefc; --muted:#a9b6d6;
+      --line:rgba(255,255,255,.08);
+      --btn:#1b2a44; --btn2:#22385c;
+      --shadow: 0 20px 70px rgba(0,0,0,.55);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 50% 0%, #101c33 0%, var(--bg1) 55%, #05070d 100%);
+      color:var(--text);
+      min-height:100vh;
+    }
+    a{color:#8fb7ff; text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1050px; margin:0 auto; padding:28px 18px 44px;}
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; margin-bottom:18px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; letter-spacing:.2px;
+    }
+    .brand .dot{width:10px; height:10px; border-radius:999px; background:#7aa8ff; box-shadow:0 0 25px rgba(122,168,255,.6)}
+    .nav{
+      display:flex; flex-wrap:wrap; gap:10px;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px; border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      color:var(--text);
+      font-size:14px;
+    }
+    .pill:hover{background:rgba(255,255,255,.10); text-decoration:none}
+    .hero{
+      margin-top:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:20px;
+      box-shadow: var(--shadow);
+    }
+    .hero h1{margin:0 0 6px; font-size:28px}
+    .hero p{margin:0; color:var(--muted); line-height:1.5}
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+      margin-top:14px;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: 0 14px 40px rgba(0,0,0,.35);
+    }
+    .card h2{margin:0 0 8px; font-size:16px}
+    .card p{margin:0; color:var(--muted); line-height:1.5; font-size:14px}
+
+    .span-8{grid-column: span 8;}
+    .span-4{grid-column: span 4;}
+    .span-6{grid-column: span 6;}
+    .span-12{grid-column: span 12;}
+
+    .tagrow{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .tag{
+      padding:7px 10px; border-radius:999px;
+      background: rgba(122,168,255,.10);
+      border: 1px solid rgba(122,168,255,.22);
+      color:#cfe0ff; font-size:12px;
+    }
+    .btnrow{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:10px 12px; border-radius:12px;
+      background: var(--btn);
+      border:1px solid var(--line);
+      color:var(--text);
+      font-weight:600; font-size:14px;
+      text-decoration:none;
+    }
+    .btn:hover{background:var(--btn2); text-decoration:none}
+    .muteline{border-top:1px solid var(--line); margin:14px 0}
+    ul{margin:10px 0 0; padding-left:18px; color:var(--muted); line-height:1.55; font-size:14px}
+    .footer{
+      margin-top:16px;
+      color:rgba(232,238,252,.55);
+      font-size:13px;
+      text-align:center;
+    }
+
+    @media (max-width: 820px){
+      .span-8,.span-4,.span-6{grid-column: span 12;}
+      .hero h1{font-size:24px}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>Naksh</span>
+      </div>
+      <div class="nav">
+        <a class="pill" href="./index.html">🏠 Home</a>
+        <a class="pill" href="./portfolio.html">📁 Portfolio</a>
+        <!-- Add later when ready:
+        <a class="pill" href="./skysense.html">🌤️ SkySense</a>
+        <a class="pill" href="./cubing.html">🧩 Cubing</a>
+        -->
+      </div>
+    </div>
+
+    <div class="hero">
+      <h1>📁 Portfolio</h1>
+      <p>
+        A growing collection of my projects, skills, and learning journey.
+        I build things in STEM, coding, and problem-solving — and I keep improving them over time.
+      </p>
+      <div class="btnrow">
+        <a class="btn" href="./index.html">← Back to Home</a>
+        <a class="btn" href="#projects">Jump to Projects ↓</a>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card span-8" id="projects">
+        <h2>🚀 Featured Projects</h2>
+        <p>These will become full pages with screenshots, write-ups, and links.</p>
+        <div class="muteline"></div>
+        <ul>
+          <li><b>SkySense (Weather Initiative):</b> forecasts, storm tracking, and tools (coming soon page).</li>
+          <li><b>Cubing Zone:</b> training plans, PB tracking, and competition prep (coming soon page).</li>
+          <li><b>Study Tools:</b> planners, streak tracking, and smart practice systems (coming soon page).</li>
+        </ul>
+        <div class="tagrow">
+          <span class="tag">STEM</span>
+          <span class="tag">Coding</span>
+          <span class="tag">Weather</span>
+          <span class="tag">Speedcubing</span>
+          <span class="tag">Learning Systems</span>
+        </div>
+      </div>
+
+      <div class="card span-4">
+        <h2>🧠 Skills (Growing)</h2>
+        <p>Quick snapshot — we can refine these later.</p>
+        <div class="muteline"></div>
+        <ul>
+          <li>Problem solving + math</li>
+          <li>Python + basic web (HTML/CSS)</li>
+          <li>Data tracking (spreadsheets, systems)</li>
+          <li>Communication + leadership</li>
+        </ul>
+      </div>
+
+      <div class="card span-6">
+        <h2>🏆 Highlights</h2>
+        <p>Small wins that show momentum.</p>
+        <div class="muteline"></div>
+        <ul>
+          <li>Consistent learning + advanced coursework</li>
+          <li>Building real projects and improving them</li>
+          <li>Focused goals for advanced high school programs</li>
+        </ul>
+      </div>
+
+      <div class="card span-6">
+        <h2>🗺️ What I’m building next</h2>
+        <p>Roadmap for the next upgrades to this site.</p>
+        <div class="muteline"></div>
+        <ul>
+          <li>Add a SkySense page with sections + screenshots</li>
+          <li>Add a Cubing page with PBs + training plan</li>
+          <li>Add a “Projects” gallery layout</li>
+          <li>Add a Contact page (simple form or email link)</li>
+        </ul>
+      </div>
+
+      <div class="card span-12">
+        <h2>📌 Quick note</h2>
+        <p>
+          This site is built with GitHub Pages and will keep evolving.
+          If you’re viewing this, check back later — new updates will keep dropping 🚀
+        </p>
+      </div>
+    </div>
+
+    <div class="footer">
+      Built by Naksh • Powered by GitHub Pages
+    </div>
+  </div>
+</body>
+</html>
