@@ -228,7 +228,6 @@
           Send ideas, feedback, or questions directly to me.
         </p>
 
-        <!-- This opens the visitor's email app and sends to your school email -->
         <form class="form" id="suggestForm">
           <div class="grid2">
             <input id="name" type="text" placeholder="Your name (optional)">
@@ -244,7 +243,7 @@
           </div>
 
           <div class="tiny">
-            Note: Clicking “Send Message” opens your email app (Gmail/Apple Mail) with the message filled in.
+            Note: Clicking “Send Message” opens Gmail compose in a new tab (best on GitHub Pages).
           </div>
         </form>
 
@@ -254,27 +253,64 @@
   </main>
 
   <script>
-    // Email target (school)
+    // Email target
     const emailTo = "1086939@gmail.com";
 
     const nameEl = document.getElementById("name");
     const subjectEl = document.getElementById("subject");
     const messageEl = document.getElementById("message");
 
-    document.getElementById("sendBtn").addEventListener("click", () => {
+    function buildSubjectAndBody() {
       const name = (nameEl.value || "").trim();
       const subject = (subjectEl.value || "").trim();
       const msg = (messageEl.value || "").trim();
 
       const finalSubject = subject ? subject : "Suggestion / Question from my website";
+
       const bodyLines = [
-        name ? `Name: ${name}` : "",
+        name ? `Name: ${name}` : "Name: (not provided)",
         "",
         msg ? msg : "(No message typed yet)"
-      ].filter(line => line !== "");
+      ];
 
-      const mailto = `mailto:${encodeURIComponent(emailTo)}?subject=${encodeURIComponent(finalSubject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+      return { finalSubject, body: bodyLines.join("\n") };
+    }
+
+    function openGmailCompose(to, subject, body) {
+      // Opens Gmail compose directly (works on GitHub Pages)
+      const gmailURL =
+        "https://mail.google.com/mail/?view=cm&fs=1" +
+        "&to=" + encodeURIComponent(to) +
+        "&su=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body);
+
+      window.open(gmailURL, "_blank", "noopener,noreferrer");
+    }
+
+    function fallbackMailto(to, subject, body) {
+      const mailto =
+        `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       window.location.href = mailto;
+    }
+
+    document.getElementById("sendBtn").addEventListener("click", () => {
+      const { finalSubject, body } = buildSubjectAndBody();
+
+      // Try Gmail compose first
+      const opened = window.open("", "_blank");
+      if (opened) {
+        // We can open a new tab -> use it for Gmail
+        opened.opener = null;
+        opened.location = "https://mail.google.com/";
+        // Replace quickly with compose URL (some browsers like this sequence)
+        opened.location = "https://mail.google.com/mail/?view=cm&fs=1"
+          + "&to=" + encodeURIComponent(emailTo)
+          + "&su=" + encodeURIComponent(finalSubject)
+          + "&body=" + encodeURIComponent(body);
+      } else {
+        // Popup blocked -> fallback to mailto (or tell user)
+        fallbackMailto(emailTo, finalSubject, body);
+      }
     });
 
     document.getElementById("copyBtn").addEventListener("click", async () => {
