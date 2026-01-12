@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Naksh Official</title>
+  <title>Portfolio • Naksh Official</title>
   <style>
     :root{
       --bg1:#060912;
@@ -31,80 +31,128 @@
       justify-content:center;
       padding:24px;
     }
-    .wrap{
-      width:min(920px, 100%);
+    .wrap{ width:min(980px, 100%); }
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:14px;
+    }
+    a.back{
+      text-decoration:none;
+      color:var(--muted);
+      font-weight:600;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      padding:10px 12px;
+      border-radius:12px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    a.back:hover{
+      transform: translateY(-1px);
+      background: rgba(120,170,255,.10);
+      border-color: rgba(120,170,255,.30);
+      color:var(--text);
     }
     .card{
       background:var(--card);
       border:1px solid var(--border);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
-      padding:28px;
+      padding:26px;
       backdrop-filter: blur(10px);
     }
     h1{
-      margin:0 0 10px;
-      font-size: clamp(28px, 4vw, 42px);
-      letter-spacing:.2px;
+      margin:0 0 6px;
+      font-size: clamp(24px, 3.2vw, 34px);
     }
     p{
       margin:0 0 18px;
       color:var(--muted);
-      line-height:1.5;
+      line-height:1.55;
       font-size: 15.5px;
     }
-    .nav{
+    .grid{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap:12px;
-      margin-top:14px;
+      margin-top:10px;
     }
-    a.btn{
+    a.tile{
       text-decoration:none;
       color:var(--text);
       border:1px solid var(--border);
       background: rgba(255,255,255,.05);
-      padding:14px 14px;
-      border-radius:14px;
+      padding:16px;
+      border-radius:16px;
       display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      font-weight:600;
+      flex-direction:column;
+      gap:6px;
       transition: transform .12s ease, background .12s ease, border-color .12s ease;
     }
-    a.btn:hover{
+    a.tile:hover{
       transform: translateY(-2px);
       background: rgba(120,170,255,.12);
       border-color: rgba(120,170,255,.35);
     }
-    .small{
+    .title{
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .desc{
+      color:rgba(255,255,255,.70);
+      font-size: 14px;
+      line-height:1.35;
+    }
+    .note{
       margin-top:14px;
       font-size:13px;
       color:rgba(255,255,255,.55);
       text-align:center;
     }
     @media (max-width:720px){
-      .nav{ grid-template-columns: 1fr; }
+      .grid{ grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <main class="wrap">
+    <div class="topbar">
+      <a class="back" href="index.html">← Home</a>
+      <a class="back" href="projects.html">Projects →</a>
+    </div>
+
     <section class="card">
-      <h1>🚀 Hi, I’m Naksh</h1>
+      <h1>📌 Portfolio</h1>
       <p>
-        Welcome to my official portfolio site. This is where I’ll share my achievements,
-        projects, and learning journey. (More features coming soon.)
+        This is my portfolio hub. Each section opens its own page.
+        I’m keeping it clean for now — later we’ll add more depth and interactive features.
       </p>
 
-      <div class="nav">
-        <a class="btn" href="portfolio.html">📌 Portfolio</a>
-        <a class="btn" href="projects.html">🧩 Projects</a>
-        <a class="btn" href="contact.html">📫 Contact</a>
+      <div class="grid">
+        <a class="tile" href="about.html">
+          <div class="title">👋 About Me</div>
+          <div class="desc">Who I am, what I’m interested in, and what I’m building.</div>
+        </a>
+
+        <a class="tile" href="achievements.html">
+          <div class="title">🏅 Achievements</div>
+          <div class="desc">Academics, leadership, competitions, and milestones.</div>
+        </a>
+
+        <a class="tile" href="school.html">
+          <div class="title">🏫 School</div>
+          <div class="desc">My classes, activities, goals, and learning focus.</div>
+        </a>
+
+        <a class="tile" href="projects.html">
+          <div class="title">🧩 Projects</div>
+          <div class="desc">SkySense, Cubing Zone, and anything else I build.</div>
+        </a>
       </div>
 
-      <div class="small">Built with GitHub Pages • Updated often</div>
+      <div class="note">More sections will be added soon (but we’re focusing on the basics first).</div>
     </section>
   </main>
 </body>
