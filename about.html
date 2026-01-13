@@ -1,0 +1,228 @@
+<!-- ABOUT ME PAGE (about.html) -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Me • Naksh</title>
+
+  <style>
+    :root{
+      --bg1:#060912;
+      --bg2:#0a1224;
+      --card:rgba(255,255,255,.06);
+      --border:rgba(255,255,255,.10);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.70);
+      --accent:rgba(120,170,255,.95);
+      --shadow: 0 16px 45px rgba(0,0,0,.45);
+      --radius: 18px;
+      --glow: 0 0 0 1px rgba(120,170,255,.25), 0 14px 40px rgba(120,170,255,.12);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(900px 600px at 20% 15%, rgba(120,170,255,.18), transparent 55%),
+        radial-gradient(800px 600px at 80% 70%, rgba(72,225,255,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px 18px;
+    }
+
+    .wrap{width:min(980px, 100%);}
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:14px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--border);
+      color:var(--text);
+      text-decoration:none;
+      font-size:14px;
+      box-shadow:0 10px 28px rgba(0,0,0,.25);
+      transition:transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .pill:hover{
+      transform:translateY(-1px);
+      background:rgba(255,255,255,.07);
+      border-color:rgba(120,170,255,.30);
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:22px;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:30px;
+      letter-spacing:.2px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .sub{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.55;
+      font-size:15px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:16px;
+    }
+    @media (max-width: 860px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    .section{
+      padding:16px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(0,0,0,.12);
+    }
+
+    h2{
+      margin:0 0 10px;
+      font-size:16px;
+      letter-spacing:.2px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    p{margin:0 0 10px; color:var(--text); line-height:1.62; font-size:14.6px}
+    p:last-child{margin-bottom:0}
+
+    ul{
+      margin:0;
+      padding-left:18px;
+      color:var(--text);
+      line-height:1.65;
+      font-size:14.6px;
+    }
+    li{margin:6px 0}
+    .muted{color:var(--muted)}
+
+    .quote{
+      margin-top:12px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(120,170,255,.22);
+      background:rgba(120,170,255,.08);
+      box-shadow:var(--glow);
+      font-style:italic;
+      color:rgba(255,255,255,.88);
+    }
+
+    .foot{
+      margin-top:12px;
+      text-align:center;
+      color:var(--muted);
+      font-size:12.5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="topbar">
+      <!-- Change href to your home page file (index.html or portfolio.html) -->
+      <a class="pill" href="index.html">← Home</a>
+      <!-- Change this to your contact page if you have one -->
+      <a class="pill" href="contact.html">Contact →</a>
+    </div>
+
+    <div class="card">
+      <h1>👋 About Me</h1>
+      <p class="sub">
+        A clean, focused snapshot of who I am, what I’m building, and where I’m going.
+      </p>
+
+      <div class="grid">
+
+        <!-- LEFT COLUMN -->
+        <div class="section">
+          <h2>🧭 Who I Am</h2>
+          <p>Hi — I’m <b>Naksh</b>.</p>
+          <p>
+            I’m a highly driven student who believes in never giving up, helping others, and constantly building new things.
+            While many students focus only on schoolwork, I actively create real projects and tools that combine my strongest interests:
+            <b>mathematics</b>, <b>coding</b>, and <b>weather science</b>.
+          </p>
+          <p>
+            I’m obsessed with understanding how systems work — from numbers and algorithms to atmospheric patterns — and I use that curiosity to
+            reflect, learn, and build practical solutions. I don’t just learn for grades; I learn so I can create tools that help people,
+            simplify complex problems, and improve everyday life.
+          </p>
+
+          <div class="quote">
+            “In 10 years, I want to be someone who builds technology and systems that help people, simplify life, and improve the world around them.”
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="section">
+          <h2>🛠️ What I’m Building</h2>
+          <ul>
+            <li><b>SkySense</b> – A student-built weather analysis and forecasting platform</li>
+            <li><b>Study App</b> – A productivity and study-tracking application designed for students</li>
+            <li><b>Rubik’s Cube Tools</b> – Apps and tools for cubers and competitive practice</li>
+            <li><b>Tutorial & Help Projects</b> – Teaching-focused builds that simplify hard topics</li>
+            <li><b>YouTube Content</b> – Skill-based and educational videos</li>
+          </ul>
+
+          <h2 style="margin-top:14px;">🎓 Academic & Leadership</h2>
+          <ul>
+            <li><b>7th grade</b> on an accelerated math path</li>
+            <li>Completed <b>Math 8</b> in 6th grade; currently taking <b>Algebra 1</b></li>
+            <li>Planning <b>Geometry</b> over the summer</li>
+            <li>All <b>A/A+</b> grades in honors-level coursework</li>
+          </ul>
+
+          <h2 style="margin-top:14px;">🏆 Highlights</h2>
+          <ul>
+            <li><b>Science Olympiad</b> Champion (4th grade)</li>
+            <li><b>Math Olympiad</b> Champion (5th grade)</li>
+            <li><b>Math Olympiad</b> – 6th place (6th grade)</li>
+            <li><b>Odyssey of the Mind</b> – States (2×), Worlds (1×)</li>
+            <li class="muted">Plus other competitions, athletics, and team experiences</li>
+          </ul>
+
+          <h2 style="margin-top:14px;">🧠 Personality</h2>
+          <p class="muted">
+            Analytical • Creative • Disciplined • Curious • Entrepreneurial • Strategic • Calm under pressure • Resilient • Leadership-oriented
+          </p>
+        </div>
+
+      </div>
+
+      <div class="foot">This portfolio is my growing record of the journey.</div>
+    </div>
+
+  </div>
+</body>
+</html>
