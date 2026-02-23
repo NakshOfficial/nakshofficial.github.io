@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>School • Naksh</title>
+
+  <style>
+    :root{
+      --bg1:#060912;
+      --bg2:#0a1224;
+      --card:rgba(255,255,255,.06);
+      --border:rgba(255,255,255,.10);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.70);
+      --shadow:0 16px 45px rgba(0,0,0,.45);
+      --radius:18px;
+      --glow:0 0 0 1px rgba(120,170,255,.25), 0 14px 40px rgba(120,170,255,.12);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(900px 600px at 20% 15%, rgba(120,170,255,.18), transparent 55%),
+        radial-gradient(800px 600px at 80% 70%, rgba(72,225,255,.10), transparent 55%),
+        linear-gradient(180deg,var(--bg1),var(--bg2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px 18px;
+    }
+
+    .wrap{width:min(1040px,100%)}
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:14px;
+      flex-wrap:wrap;
+    }
+
+    .topbar-right{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-left:auto;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 13px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--border);
+      color:var(--text);
+      text-decoration:none;
+      font-size:14px;
+      box-shadow:0 10px 28px rgba(0,0,0,.25);
+      transition:transform .15s ease,background .15s ease,border-color .15s ease, box-shadow .15s ease;
+    }
+
+    .pill.small{font-size:13px;padding:7px 11px}
+
+    .pill:hover{
+      transform:translateY(-1px);
+      background:rgba(255,255,255,.07);
+      border-color:rgba(120,170,255,.32);
+      box-shadow:var(--glow);
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      padding:22px;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:30px;
+      letter-spacing:.2px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .sub{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.55;
+      font-size:15px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:16px;
+    }
+
+    .section{
+      padding:16px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(0,0,0,.12);
+      transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+    }
+
+    .section:hover{
+      transform:translateY(-2px);
+      border-color:rgba(120,170,255,.24);
+      box-shadow:var(--glow);
+    }
+
+    h2{
+      margin:0 0 10px;
+      font-size:16px;
+      letter-spacing:.2px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    h3{
+      margin:12px 0 8px;
+      font-size:14px;
+      color:rgba(255,255,255,.9);
+      letter-spacing:.2px;
+    }
+
+    ul{
+      margin:0;
+      padding-left:18px;
+      color:var(--text);
+      line-height:1.65;
+      font-size:14.6px;
+    }
+
+    li{margin:6px 0}
+
+    .note{
+      margin:10px 0 0;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.55;
+    }
+
+    .tiny{font-size:12px; opacity:.95; margin-top:6px}
+
+    .foot{
+      margin-top:14px;
+      text-align:center;
+      color:var(--muted);
+      font-size:12.5px;
+    }
+
+    @media (max-width:860px){
+      .grid{grid-template-columns:1fr}
+      .wrap{width:min(760px,100%)}
+    }
+
+    @media (max-width:540px){
+      body{padding:18px 12px}
+      .card{padding:18px}
+      h1{font-size:27px}
+      .topbar{gap:8px}
+      .topbar-right{width:100%;justify-content:flex-end}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <a class="pill" href="portfolio.html">← Portfolio</a>
+      <div class="topbar-right">
+        <a class="pill small" href="contact.html">Contact →</a>
+        <a class="pill" href="index.html">Home</a>
+      </div>
+    </div>
+
+    <main class="card">
+      <h1>📚 School</h1>
+      <p class="sub">My classes, activities, goals, and academic focus.</p>
+
+      <section class="grid">
+        <article class="section">
+          <h2>🎓 Current &amp; Planned Coursework</h2>
+
+          <h3>Current Classes (All Honors)</h3>
+          <ul>
+            <li>Honors Science</li>
+            <li>Algebra 1 — High School Credit (accelerated math pathway)</li>
+            <li>Spanish 1 — High School Credit</li>
+            <li>Honors English 7</li>
+            <li>Honors History</li>
+          </ul>
+          <p class="note">All courses are taken at the honors level, with accelerated placement in mathematics.</p>
+
+          <h3>Planned Coursework (Accelerated Path)</h3>
+          <ul>
+            <li>Honors Geometry — High School Credit (planned for summer completion)</li>
+            <li>Honors Algebra 2 &amp; Trigonometry — High School Credit (8th grade)</li>
+            <li>Spanish 2 — High School Credit</li>
+            <li>Robotics / Engineering Elective — High School Credit</li>
+          </ul>
+          <p class="note">All planned courses are honors-level high school classes, continuing an accelerated academic trajectory.</p>
+          <p class="note tiny">More detailed course planning will be added soon.</p>
+        </article>
+
+        <article class="section">
+          <h2>🧠 Academic Focus</h2>
+          <ul>
+            <li>STEM-focused learning pathway</li>
+            <li>Mathematics and competition-level problem solving</li>
+            <li>Computer science and coding (building real projects)</li>
+            <li>Weather science, data analysis, and forecasting</li>
+            <li>Strong writing, communication, and leadership development</li>
+            <li>Preparing for competitive STEM programs (AET, TJ, etc.)</li>
+          </ul>
+        </article>
+
+        <article class="section">
+          <h2>🏫 Activities &amp; Enrichment</h2>
+          <ul>
+            <li>Student Council Association (SCA Representative)</li>
+            <li>Math competitions + team practice (AMC / CML / Math Kangaroo / VML, etc.)</li>
+            <li>Science Olympiad involvement</li>
+            <li>Coding projects (apps/tools)</li>
+            <li>Rubik’s Cube competitions + speedcubing training</li>
+            <li>Tutoring / helping peers (when possible)</li>
+            <li>Clubs and athletics (as available)</li>
+          </ul>
+        </article>
+
+        <article class="section">
+          <h2>🎯 Goals</h2>
+
+          <h3>Short-Term Goals</h3>
+          <ul>
+            <li>Maintain straight A’s in honors classes</li>
+            <li>Complete Geometry over the summer and continue accelerated math</li>
+            <li>Strengthen leadership through SCA and school involvement</li>
+            <li>Keep building technical projects with real-world impact</li>
+            <li>Compete consistently in academic competitions</li>
+          </ul>
+
+          <h3>Long-Term Goals</h3>
+          <ul>
+            <li>Attend a top STEM-focused high school program</li>
+            <li>Build impactful technology, research, and engineering projects</li>
+            <li>Develop strong leadership and communication skills</li>
+            <li>Prepare for top universities</li>
+            <li>Create tools that help people and improve everyday life</li>
+          </ul>
+        </article>
+      </section>
+
+      <div class="foot">This page reflects my academic path and ongoing growth.</div>
+    </main>
+  </div>
+</body>
+</html>
