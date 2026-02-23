@@ -207,6 +207,18 @@
           projects, and learning journey. (More features coming soon.)
         </p>
 
+        <hr>
+<h2>Account</h2>
+
+<input id="email" type="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+
+<button id="signupBtn">Sign Up</button>
+<button id="loginBtn">Log In</button>
+<button id="logoutBtn">Log Out</button>
+
+<p id="status"></p>
+
         <div class="nav">
           <a class="btn" href="portfolio.html">📌 Portfolio</a>
           <a class="btn" href="contact.html">📫 Contact</a>
@@ -331,6 +343,28 @@ const supabaseUrl = "https://uekwgzprcbwvgkghtgqk.supabase.co";
 const supabaseKey = "sb_publishable__L0ZL7D2KubRYloYaksQ8g_dCeRTDF3";
 
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+  const status = document.getElementById("status");
+
+document.getElementById("signupBtn").onclick = async () => {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const { error } = await supabase.auth.signUp({ email, password });
+  status.textContent = error ? error.message : "Signed up! Check your email.";
+};
+
+document.getElementById("loginBtn").onclick = async () => {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  status.textContent = error ? error.message : "Logged in!";
+};
+
+document.getElementById("logoutBtn").onclick = async () => {
+  await supabase.auth.signOut();
+  status.textContent = "Logged out.";
+};
 </script>
 </body>
 </html>
