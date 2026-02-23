@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NakshOfficial • Login</title>
+  <style>
+    :root{
+      --bg1:#070b16; --bg2:#0b1327;
+      --card:rgba(255,255,255,.06);
+      --border:rgba(255,255,255,.12);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.70);
+      --shadow:0 18px 60px rgba(0,0,0,.45);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100vh; display:grid; place-items:center;
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      color:var(--text);
+      background:radial-gradient(900px 420px at 50% 35%, rgba(60,120,255,.14), transparent 60%),
+                 radial-gradient(900px 500px at 75% 80%, rgba(0,255,200,.10), transparent 55%),
+                 linear-gradient(180deg, var(--bg1), var(--bg2));
+    }
+    .shell{width:min(980px,92vw); padding:28px}
+    .top{
+      display:flex; justify-content:space-between; align-items:center; gap:10px;
+      margin-bottom:16px;
+    }
+    .pill{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 12px; border-radius:999px;
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--border);
+      color:var(--text); text-decoration:none;
+      font-size:14px;
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(12px);
+      padding:22px;
+    }
+    h1{margin:0 0 6px; font-size:28px; letter-spacing:.5px}
+    p.sub{margin:0 0 18px; color:var(--muted); line-height:1.5}
+    .grid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+    @media (max-width:820px){.grid{grid-template-columns:1fr}}
+    label{font-size:13px; color:var(--muted)}
+    input{
+      width:100%;
+      padding:12px 12px;
+      margin-top:6px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.18);
+      color:var(--text);
+      outline:none;
+    }
+    input:focus{border-color:rgba(120,170,255,.55)}
+    .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    button{
+      padding:11px 14px; border-radius:12px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.08);
+      color:var(--text);
+      cursor:pointer;
+      font-weight:700;
+    }
+    button:hover{transform:translateY(-1px)}
+    .note{margin-top:14px; font-size:13px; color:var(--muted); line-height:1.45}
+    .ok{color:#a7ffcf}
+    .bad{color:#ffb2b2}
+    .status{margin-top:12px; font-size:13px; color:var(--muted)}
+    .small{font-size:12px; opacity:.9}
+    .check{
+      display:flex; gap:10px; align-items:center;
+      margin-top:12px; color:var(--muted); font-size:13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="top">
+      <a class="pill" href="index.html">← Home</a>
+      <a class="pill" href="contact.html">Contact →</a>
+    </div>
+
+    <div class="card">
+      <h1>🔐 Account Login</h1>
+      <p class="sub">
+        Create an account so your progress doesn’t reset when you refresh.
+        (Email + password)
+      </p>
+
+      <div class="grid">
+        <div>
+          <label for="name">Display Name</label>
+          <input id="name" placeholder="Naksh" autocomplete="name" />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" placeholder="name@email.com" autocomplete="email" />
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="At least 6 characters" autocomplete="new-password" />
+        </div>
+        <div>
+          <label>Actions</label>
+          <div class="row">
+            <button id="btnSignup">Sign Up</button>
+            <button id="btnLogin">Log In</button>
+            <button id="btnLogout">Log Out</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="check">
+        <input id="updates" type="checkbox" />
+        <label for="updates">I want update emails (optional)</label>
+      </div>
+
+      <div id="status" class="status"></div>
+      <div class="note">
+        <div class="small">
+          Tip: After you sign up, check your email for a confirmation link (if you left “Confirm email” ON in Supabase).
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supabase JS (CDN) -->
+  <script type="module">
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+    // ✅ Your Supabase project settings
+    const SUPABASE_URL = "https://uekwgzprcbwvgkghtgqk.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable__L0ZL7D2KubRYloYaksQ8g_dCeRTDF3";
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const $ = (id) => document.getElementById(id);
+    const statusEl = $("status");
+
+    function setStatus(msg, type="") {
+      statusEl.innerHTML = type
+        ? `<span class="${type}">${msg}</span>`
+        : msg;
+    }
+
+    async function upsertProfile(user, name, wantsUpdate) {
+      // profiles table columns you created:
+      // id (uuid, primary), name (text), email (text), wants_update (bool), created_at (timestamp)
+      const payload = {
+        id: user.id,
+        name: name || null,
+        email: user.email || null,
+        wants_update: !!wantsUpdate
+      };
+
+      // requires your RLS policies: INSERT/SELECT/UPDATE with auth.uid() = id
+      const { error } = await supabase.from("profiles").upsert(payload, { onConflict: "id" });
+      if (error) throw error;
+    }
+
+    async function goAccount() {
+      // send user to account page after login
+      window.location.href = "account.html";
+    }
+
+    async function handleSignup() {
+      try {
+        setStatus("Signing up…");
+        const email = $("email").value.trim();
+        const password = $("password").value;
+        const name = $("name").value.trim();
+        const wantsUpdate = $("updates").checked;
+
+        if (!email || !password) return setStatus("Email + password required.", "bad");
+        if (password.length < 6) return setStatus("Password must be at least 6 characters.", "bad");
+
+        const { data, error } = await supabase.auth.signUp({ email, password });
+        if (error) throw error;
+
+        // If email confirm is ON, session may be null until they confirm.
+        if (data?.user) {
+          // If they’re already authenticated (some configs), save profile immediately
+          const { data: sessionData } = await supabase.auth.getSession();
+          if (sessionData?.session?.user) {
+            await upsertProfile(sessionData.session.user, name, wantsUpdate);
+          }
+        }
+
+        setStatus("✅ Sign up started. If you enabled email confirm, check your inbox and confirm, then come back and Log In.", "ok");
+      } catch (err) {
+        setStatus("❌ " + (err?.message || String(err)), "bad");
+      }
+    }
+
+    async function handleLogin() {
+      try {
+        setStatus("Logging in…");
+        const email = $("email").value.trim();
+        const password = $("password").value;
+        const name = $("name").value.trim();
+        const wantsUpdate = $("updates").checked;
+
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+
+        await upsertProfile(data.user, name, wantsUpdate);
+        setStatus("✅ Logged in! Redirecting…", "ok");
+        setTimeout(goAccount, 450);
+      } catch (err) {
+        setStatus("❌ " + (err?.message || String(err)), "bad");
+      }
+    }
+
+    async function handleLogout() {
+      try {
+        await supabase.auth.signOut();
+        setStatus("Logged out.", "");
+      } catch (err) {
+        setStatus("❌ " + (err?.message || String(err)), "bad");
+      }
+    }
+
+    // Auto-detect session (refresh-safe)
+    async function init() {
+      const { data } = await supabase.auth.getSession();
+      if (data?.session?.user) {
+        setStatus("✅ You’re already logged in. Redirecting…", "ok");
+        setTimeout(goAccount, 450);
+      } else {
+        setStatus("Not logged in yet.");
+      }
+    }
+
+    $("btnSignup").addEventListener("click", handleSignup);
+    $("btnLogin").addEventListener("click", handleLogin);
+    $("btnLogout").addEventListener("click", handleLogout);
+
+    init();
+  </script>
+</body>
+</html>
