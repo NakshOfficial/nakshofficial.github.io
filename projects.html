@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects • Naksh Official</title>
+  <style>
+    :root{
+      --bg1:#060912;
+      --bg2:#0a1224;
+      --card:rgba(255,255,255,.06);
+      --border:rgba(255,255,255,.10);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.70);
+      --accent:rgba(120,170,255,.95);
+      --shadow: 0 16px 45px rgba(0,0,0,.45);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% 10%, rgba(120,170,255,.18), transparent 60%),
+        radial-gradient(900px 500px at 80% 35%, rgba(100,255,200,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+
+    .wrap{width:min(1050px, 100%)}
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:14px;
+      flex-wrap:wrap;
+    }
+
+    .nav-left,
+    .nav-right{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    a.btn{
+      text-decoration:none;
+      color:var(--muted);
+      font-weight:600;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:10px 14px;
+      border-radius:999px;
+      transition:transform .12s ease, background .12s ease, border-color .12s ease, color .12s ease, box-shadow .12s ease;
+    }
+
+    a.btn:hover{
+      transform:translateY(-1px);
+      background:rgba(120,170,255,.10);
+      border-color:rgba(120,170,255,.30);
+      color:var(--text);
+      box-shadow:0 8px 24px rgba(120,170,255,.18);
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:26px;
+      backdrop-filter:blur(10px);
+    }
+
+    h1{
+      margin:0 0 8px;
+      font-size:clamp(24px, 3.2vw, 34px);
+    }
+
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      line-height:1.55;
+      font-size:15.5px;
+    }
+
+    .small-note{
+      margin-top:8px;
+      margin-bottom:20px;
+      color:rgba(255,255,255,.64);
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:14px;
+      margin-top:10px;
+    }
+
+    .project{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.045);
+      border-radius:16px;
+      padding:18px;
+      transition:transform .12s ease, background .12s ease, border-color .12s ease, box-shadow .12s ease;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .project:hover{
+      transform:translateY(-2px);
+      background:rgba(120,170,255,.09);
+      border-color:rgba(120,170,255,.28);
+      box-shadow:0 10px 28px rgba(0,0,0,.28);
+    }
+
+    .project.wide{grid-column:1 / -1}
+
+    .project-title{
+      margin:0;
+      font-size:20px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+
+    .project-desc{
+      margin:0;
+      color:rgba(255,255,255,.72);
+      line-height:1.45;
+      font-size:14.5px;
+    }
+
+    .section-title{
+      margin:2px 0 4px;
+      font-size:13px;
+      letter-spacing:.25px;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.86);
+    }
+
+    ul{
+      margin:0;
+      padding-left:20px;
+      color:rgba(255,255,255,.72);
+      line-height:1.45;
+      font-size:14px;
+      display:grid;
+      gap:4px;
+    }
+
+    .meta{
+      margin-top:auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .status{
+      display:inline-flex;
+      align-items:center;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(120,170,255,.35);
+      background:rgba(120,170,255,.12);
+      color:rgba(220,235,255,.95);
+      font-size:12.5px;
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+
+    .coming-soon{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:9px 12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.03);
+      color:rgba(255,255,255,.52);
+      font-size:13px;
+      font-weight:600;
+      cursor:not-allowed;
+      pointer-events:none;
+      user-select:none;
+    }
+
+    .footer-note{
+      margin-top:18px;
+      text-align:center;
+      font-size:13px;
+      color:rgba(255,255,255,.56);
+    }
+
+    @media (max-width:820px){
+      .grid{grid-template-columns:1fr}
+      .project.wide{grid-column:auto}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="topbar">
+      <div class="nav-left">
+        <a class="btn" href="portfolio.html">← Portfolio</a>
+      </div>
+      <div class="nav-right">
+        <a class="btn" href="index.html">Home</a>
+        <a class="btn" href="contact.html">Contact →</a>
+      </div>
+    </div>
+
+    <section class="card">
+      <h1>🧩 Projects</h1>
+      <p class="subtitle">The main projects I’m building over time — starting simple, and growing them into full platforms.</p>
+      <p class="small-note">These projects will take years to fully build, and I’m excited to keep improving them for everyone.</p>
+
+      <div class="grid">
+        <article class="project">
+          <h2 class="project-title">🧠 Rubik’s Cube Training App</h2>
+          <p class="project-desc">A training app to help cubers learn faster, track times, and improve rankings.</p>
+
+          <div>
+            <h3 class="section-title">Current Focus</h3>
+            <ul>
+              <li>Session timer + average tracking (ao5, ao12)</li>
+              <li>Practice planner + goal setting</li>
+              <li>Personal bests + progress history</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="section-title">Future Features</h3>
+            <ul>
+              <li>Algorithms library (OLL/PLL) with learning mode</li>
+              <li>Smart training plans based on weaknesses</li>
+              <li>Ranks/levels + achievements and badges</li>
+              <li>Leaderboards (friends + global later)</li>
+              <li>Competition prep mode + mock solves</li>
+              <li>Cube tools: scrambler, TPS estimator, stats dashboard</li>
+            </ul>
+          </div>
+
+          <div class="meta">
+            <span class="status">Status: Planning</span>
+            <span class="coming-soon">Project Page: Coming Soon</span>
+          </div>
+        </article>
+
+        <article class="project">
+          <h2 class="project-title">🌦️ SkySense Weather Platform</h2>
+          <p class="project-desc">A student-built weather platform designed to be a go-to source for forecasts, alerts, and weather tools.</p>
+
+          <div>
+            <h3 class="section-title">Current Focus</h3>
+            <ul>
+              <li>Clean forecast pages + simple UI</li>
+              <li>Weather tools (feels-like, wind chill, conversions)</li>
+              <li>Local updates + clear explanations</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="section-title">Future Features</h3>
+            <ul>
+              <li>“Snow Day HQ” prediction tools and reports</li>
+              <li>Radar + model comparison dashboard (future)</li>
+              <li>Hyper-local alert system + notification ideas</li>
+              <li>Weather education section (learn as you track)</li>
+              <li>Storm recap posts + data visualizations</li>
+              <li>Public “daily forecast” page workflow</li>
+            </ul>
+          </div>
+
+          <div class="meta">
+            <span class="status">Status: Planning</span>
+            <span class="coming-soon">Project Page: Coming Soon</span>
+          </div>
+        </article>
+
+        <article class="project wide">
+          <h2 class="project-title">📚 Study Planner &amp; Grades Booster App</h2>
+          <p class="project-desc">A productivity app to help students manage time, stay consistent, and improve grades.</p>
+
+          <div>
+            <h3 class="section-title">Current Focus</h3>
+            <ul>
+              <li>Study logging + streak tracking</li>
+              <li>Schedule builder + daily plans</li>
+              <li>Simple charts and progress reports</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="section-title">Future Features</h3>
+            <ul>
+              <li>Smart reminders + goals (daily/weekly)</li>
+              <li>Pomodoro with stats + focus history</li>
+              <li>Subject difficulty tracking and trends</li>
+              <li>Badges/XP leveling system</li>
+              <li>Exportable weekly/monthly reports</li>
+              <li>Study “pet/mascot” motivation features (future)</li>
+            </ul>
+          </div>
+
+          <div class="meta">
+            <span class="status">Status: Building</span>
+            <span class="coming-soon">Project Page: Coming Soon</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="footer-note">Project pages and live demos will be linked here as they launch.</div>
+    </section>
+  </main>
+</body>
+</html>
