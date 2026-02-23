@@ -42,7 +42,16 @@
       display:flex;
       justify-content:space-between;
       align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
       margin-bottom:14px;
+    }
+
+    .topbarRight{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin-left:auto;
     }
 
     .pill{
@@ -143,6 +152,11 @@
       color:var(--muted);
       font-size:12.5px;
     }
+
+    @media (max-width: 860px){
+      .topbar{justify-content:flex-start}
+      .topbarRight{margin-left:0}
+    }
   </style>
 </head>
 
@@ -150,10 +164,11 @@
   <div class="wrap">
 
     <div class="topbar">
-      <!-- Change href to your home page file (index.html or portfolio.html) -->
-      <a class="pill" href="index.html">← Home</a>
-      <!-- Change this to your contact page if you have one -->
-      <a class="pill" href="contact.html">Contact →</a>
+      <a class="pill" href="portfolio.html">← Portfolio</a>
+      <div class="topbarRight">
+        <a class="pill" href="index.html">Home</a>
+        <a class="pill" href="contact.html">Contact →</a>
+      </div>
     </div>
 
     <div class="card">
