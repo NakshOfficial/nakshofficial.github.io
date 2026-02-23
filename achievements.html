@@ -38,11 +38,18 @@
 
     .topbar{
       display:flex;
-      justify-content:flex-start;
+      justify-content:space-between;
       align-items:center;
       margin-bottom:14px;
       gap:10px;
       flex-wrap:wrap;
+    }
+
+    .topbarRight{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin-left:auto;
     }
 
     .pill{
@@ -174,6 +181,8 @@
 
     @media (max-width: 860px){
       .grid{grid-template-columns:1fr}
+      .topbar{justify-content:flex-start}
+      .topbarRight{margin-left:0}
     }
   </style>
 </head>
@@ -181,8 +190,10 @@
   <div class="wrap">
     <div class="topbar">
       <a class="pill" href="portfolio.html">← Portfolio</a>
-      <a class="pill" href="index.html">Home</a>
-      <a class="pill" href="contact.html">Contact →</a>
+      <div class="topbarRight">
+        <a class="pill" href="index.html">Home</a>
+        <a class="pill" href="contact.html">Contact →</a>
+      </div>
     </div>
 
     <div class="card">
