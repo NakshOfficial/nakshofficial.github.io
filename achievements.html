@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Achievements | Naksh Official</title>
+
+
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #121a30;
+      --text: #eaf0ff;
+      --muted: #b5c0df;
+      --accent: #6fd8ff;
+      --accent2: #9a8dff;
+      --border: rgba(147, 175, 255, 0.28);
+      --radius: 14px;
+      --shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at top right, #1f2c4f, var(--bg) 45%);
+    }
+
+    .container {
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+    }
+
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(11, 16, 32, 0.82);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .site-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 0;
+    }
+
+    .brand { font-weight: 700; letter-spacing: 0.02em; }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      background: linear-gradient(120deg, rgba(111, 216, 255, 0.24), rgba(154, 141, 255, 0.24));
+    }
+
+    .hero { padding: 4rem 0 1.6rem; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 0.4rem; }
+    .hero p { margin: 0; color: var(--muted); font-size: 1.05rem; }
+
+    .view-toggle {
+      margin-top: 1.1rem;
+      display: inline-flex;
+      padding: 0.25rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(18, 26, 48, 0.9);
+      gap: 0.3rem;
+    }
+
+    .view-toggle button {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 0.45rem 0.9rem;
+      cursor: pointer;
+    }
+
+    .view-toggle button[aria-pressed="true"] {
+      color: var(--text);
+      background: linear-gradient(120deg, rgba(111, 216, 255, 0.24), rgba(154, 141, 255, 0.24));
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin: 1.2rem 0 1.8rem;
+    }
+
+    .card {
+      background: linear-gradient(155deg, #172344, var(--panel));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover { transform: translateY(-4px); border-color: rgba(111, 216, 255, 0.6); }
+    .card h3 { margin-top: 0; margin-bottom: 0.5rem; }
+    .card ul { margin: 0; padding-left: 1.15rem; color: var(--muted); }
+    .card li { margin: 0.35rem 0; }
+
+    .featured {
+      border: 1px solid rgba(111, 216, 255, 0.45);
+      background: linear-gradient(135deg, rgba(111, 216, 255, 0.14), rgba(154, 141, 255, 0.14));
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .featured a { color: var(--accent); }
+
+    .timeline {
+      display: none;
+      border-left: 2px solid rgba(154, 141, 255, 0.55);
+      padding-left: 1rem;
+      margin: 1rem 0 2rem;
+    }
+
+    .timeline.active,
+    .categories.active { display: block; }
+
+    .point { margin-bottom: 1rem; }
+    .point h3 { margin: 0 0 0.25rem; }
+    .point p { margin: 0; color: var(--muted); }
+
+    footer {
+      text-align: center;
+      padding: 0.8rem 0 2rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    @media (max-width: 720px) {
+      .site-nav-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+
+</head>
+<body>
+  <header class="site-nav">
+    <div class="container site-nav-inner">
+      <a class="brand" href="index.html">Naksh Official</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a class="active" href="achievements.html" aria-current="page">Achievements</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Achievements</h1>
+      <p>Highlights of my competitions, leadership, and activities.</p>
+      <div class="view-toggle" aria-label="Switch achievements view">
+        <button id="categoryBtn" type="button" aria-pressed="true">By Category</button>
+        <button id="gradeBtn" type="button" aria-pressed="false">By Grade</button>
+      </div>
+    </section>
+
+    <section class="categories active" id="categoryView">
+      <div class="cards">
+        <article class="card">
+          <h3>Competitions</h3>
+          <ul>
+            <li>Math Olympiad: 5th grade winner; 6th grade 6th place; 7th grade currently participating.</li>
+            <li>Science Olympiad: 4th grade winner.</li>
+            <li>Odyssey of the Mind: 4th grade regional winner (went to states).</li>
+            <li>Odyssey of the Mind (6th): 1st regional, 2nd states, 21st in the world.</li>
+            <li>Noetic Math Contest: Fall 2024 National Honorable Mention; Spring 2025 National Honor Roll; Spring 2025 National Honorable Mention.</li>
+            <li>AMC, Math Kangaroo, CML, VML (this year 29/30).</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Leadership &amp; Clubs</h3>
+          <ul>
+            <li>Won SCA elections.</li>
+            <li>Chess club, coding club, and mock trial club.</li>
+            <li>Creating a math competition group.</li>
+            <li>Rubik's Cube competitions (official WCA participation).</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Awards &amp; Honors</h3>
+          <ul>
+            <li>Always Honor Roll (all A's).</li>
+            <li>School IMPACT award for character traits.</li>
+            <li>Many school and teacher awards over the years.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Sports &amp; Activities</h3>
+          <ul>
+            <li>Running club (4th and 5th grade).</li>
+            <li>Taekwondo (4th–6th grade).</li>
+            <li>Cricket, soccer, volleyball, badminton, and pickleball.</li>
+            <li>Cricket medal and strong interest in arts.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Rubik's Cube</h3>
+          <ul>
+            <li>WCA ID: 2025NAKS01.</li>
+            <li>Official profile and competition records are available on WCA.</li>
+            <li>Focused on improving speed and consistency.</li>
+          </ul>
+        </article>
+      </div>
+
+      <aside class="featured">
+        <h3>Featured Link: WCA Profile</h3>
+        <p>
+          <a href="https://www.worldcubeassociation.org/persons/2025NAKS01" target="_blank" rel="noopener noreferrer">https://www.worldcubeassociation.org/persons/2025NAKS01</a>
+        </p>
+      </aside>
+    </section>
+
+    <section class="timeline" id="gradeView">
+      <article class="point">
+        <h3>Elementary (4th–5th)</h3>
+        <p>Won Science Olympiad (4th), won Odyssey of the Mind regional (4th), joined running club, and won Math Olympiad in 5th grade.</p>
+      </article>
+      <article class="point">
+        <h3>6th Grade</h3>
+        <p>Placed 6th in Math Olympiad and earned Odyssey of the Mind results: 1st regional, 2nd states, 21st world.</p>
+      </article>
+      <article class="point">
+        <h3>7th Grade</h3>
+        <p>Currently participating in Math Olympiad, earned Noetic honors, scored 29/30 in VML, and won SCA elections.</p>
+      </article>
+      <article class="point">
+        <h3>8th+</h3>
+        <p>Continuing leadership, clubs, academics, and Rubik's Cube growth.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="container">More achievements will be added!</footer>
+
+  <script>
+    const categoryBtn = document.getElementById('categoryBtn');
+    const gradeBtn = document.getElementById('gradeBtn');
+    const categoryView = document.getElementById('categoryView');
+    const gradeView = document.getElementById('gradeView');
+
+    function setView(mode) {
+      const categoryMode = mode === 'category';
+      categoryBtn.setAttribute('aria-pressed', String(categoryMode));
+      gradeBtn.setAttribute('aria-pressed', String(!categoryMode));
+      categoryView.classList.toggle('active', categoryMode);
+      gradeView.classList.toggle('active', !categoryMode);
+    }
+
+    categoryBtn.addEventListener('click', () => setView('category'));
+    gradeBtn.addEventListener('click', () => setView('grade'));
+  </script>
+</body>
+</html>
