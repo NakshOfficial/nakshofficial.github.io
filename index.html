@@ -210,15 +210,27 @@
         <hr>
 <h2>Account</h2>
 
-<input id="email" type="email" placeholder="Email">
-<input id="password" type="password" placeholder="Password">
+<p id="welcome" style="margin:8px 0 10px; font-weight:700;"></p>
 
-<button id="signupBtn">Sign Up</button>
-<button id="loginBtn">Log In</button>
-<button id="logoutBtn">Log Out</button>
+<div style="display:grid; gap:10px; max-width:420px;">
+  <input id="accountName" type="text" placeholder="Your name (optional)">
+  <input id="email" type="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password (6+ characters)">
 
-<p id="status"></p>
+  <div style="display:flex; gap:10px; align-items:center;">
+    <input id="updates" type="checkbox" style="width:auto;">
+    <label for="updates" style="margin:0;">Subscribe to updates (optional)</label>
+  </div>
 
+  <div style="display:flex; gap:10px; flex-wrap:wrap;">
+    <button id="signupBtn">Sign Up</button>
+    <button id="loginBtn">Log In</button>
+    <button id="saveBtn" style="display:none;">Save Profile</button>
+    <button id="logoutBtn" style="display:none;">Log Out</button>
+  </div>
+
+  <p id="status" style="margin:6px 0 0;"></p>
+</div>
         <div class="nav">
           <a class="btn" href="portfolio.html">📌 Portfolio</a>
           <a class="btn" href="contact.html">📫 Contact</a>
@@ -335,36 +347,148 @@
         alert("Copy didn’t work on this browser. Email: " + emailTo);
       }
     });
-  </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-const supabaseUrl = "https://uekwgzprcbwvgkghtgqk.supabase.co";
-const supabaseKey = "sb_publishable__L0ZL7D2KubRYloYaksQ8g_dCeRTDF3";
+  const supabaseUrl = "https://uekwgzprcbwvgkghtgqk.supabase.co";
+  const supabaseKey = "sb_publishable__L0ZL7D2KubRYloYaksQ8g_dCeRTDF3";
+  const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
-  const status = document.getElementById("status");
+  const statusEl = document.getElementById("status");
+  const welcomeEl = document.getElementById("welcome");
 
-document.getElementById("signupBtn").onclick = async () => {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  const nameEl2 = document.getElementById("accountName"); // (important: different id than your contact form's "name")
+  const emailEl = document.getElementById("email");
+  const passEl = document.getElementById("password");
+  const updatesEl = document.getElementById("updates");
 
-  const { error } = await supabase.auth.signUp({ email, password });
-  status.textContent = error ? error.message : "Signed up! Check your email.";
-};
+  const signupBtn = document.getElementById("signupBtn");
+  const loginBtn = document.getElementById("loginBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const saveBtn = document.getElementById("saveBtn");
 
-document.getElementById("loginBtn").onclick = async () => {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  function setStatus(msg) {
+    statusEl.textContent = msg;
+  }
 
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
-  status.textContent = error ? error.message : "Logged in!";
-};
+  function setWelcome(msg) {
+    welcomeEl.textContent = msg || "";
+  }
 
-document.getElementById("logoutBtn").onclick = async () => {
-  await supabase.auth.signOut();
-  status.textContent = "Logged out.";
-};
+  async function loadProfile(user) {
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("name, wants_update")
+      .eq("id", user.id)
+      .maybeSingle();
+
+    // If no row yet, that's ok (we'll create it on Save/Profile upsert)
+    if (error) return;
+
+    if (data) {
+      if (typeof data.name === "string" && data.name.length) nameEl2.value = data.name;
+      if (typeof data.wants_update === "boolean") updatesEl.checked = data.wants_update;
+    }
+  }
+
+  async function upsertProfile(user) {
+    const payload = {
+      id: user.id,
+      email: user.email,
+      name: (nameEl2.value || "").trim() || null,
+      wants_update: !!updatesEl.checked
+    };
+
+    const { error } = await supabase
+      .from("profiles")
+      .upsert(payload, { onConflict: "id" });
+
+    if (error) throw error;
+  }
+
+  async function refreshUI() {
+    const { data } = await supabase.auth.getSession();
+    const user = data?.session?.user;
+
+    if (!user) {
+      setWelcome("");
+      setStatus("Not logged in (that’s okay).");
+      logoutBtn.style.display = "none";
+      saveBtn.style.display = "none";
+      return;
+    }
+
+    logoutBtn.style.display = "inline-block";
+    saveBtn.style.display = "inline-block";
+
+    // Load profile info from DB and greet nicely
+    await loadProfile(user);
+    const displayName = (nameEl2.value || "").trim();
+    setWelcome(displayName ? `👋 Welcome, ${displayName}!` : `👋 Welcome!`);
+    setStatus(`✅ Logged in as ${user.email}`);
+  }
+
+  signupBtn.onclick = async () => {
+    const email = emailEl.value.trim();
+    const password = passEl.value;
+
+    if (!email || !password) return setStatus("Email + password required.");
+    if (password.length < 6) return setStatus("Password must be 6+ characters.");
+
+    const { error } = await supabase.auth.signUp({ email, password });
+
+    if (error) return setStatus("Sign up error: " + error.message);
+
+    // With confirm-email ON, user must confirm, then come back and log in
+    setStatus("✅ Signed up! Check your email to confirm, then come back and Log In.");
+  };
+
+  loginBtn.onclick = async () => {
+    const email = emailEl.value.trim();
+    const password = passEl.value;
+
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) return setStatus("Login error: " + error.message);
+
+    // Now that user is actually logged in, we can safely save their profile row
+    try {
+      await upsertProfile(data.user);
+      setStatus("✅ Logged in! Profile saved.");
+    } catch (e) {
+      setStatus("✅ Logged in, but profile save failed: " + (e?.message || e));
+    }
+
+    await refreshUI();
+  };
+
+  saveBtn.onclick = async () => {
+    const { data } = await supabase.auth.getSession();
+    const user = data?.session?.user;
+    if (!user) return setStatus("You must be logged in to save your profile.");
+
+    try {
+      await upsertProfile(user);
+      const displayName = (nameEl2.value || "").trim();
+      setWelcome(displayName ? `👋 Welcome, ${displayName}!` : `👋 Welcome!`);
+      setStatus("✅ Profile saved.");
+    } catch (e) {
+      setStatus("Profile save failed: " + (e?.message || e));
+    }
+  };
+
+  logoutBtn.onclick = async () => {
+    await supabase.auth.signOut();
+    setWelcome("");
+    setStatus("Logged out.");
+    logoutBtn.style.display = "none";
+    saveBtn.style.display = "none";
+  };
+
+  // Update UI whenever login state changes (refresh safe)
+  supabase.auth.onAuthStateChange(() => refreshUI());
+
+  // Initial load
+  refreshUI();
 </script>
 </body>
 </html>
