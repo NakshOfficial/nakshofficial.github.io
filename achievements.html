@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Achievements • Naksh Official</title>
+  <title>Achievements</title>
   <style>
     :root{
       --bg1:#060912;
@@ -12,7 +12,6 @@
       --border:rgba(255,255,255,.10);
       --text:rgba(255,255,255,.92);
       --muted:rgba(255,255,255,.70);
-      --accent:rgba(120,170,255,.95);
       --shadow: 0 16px 45px rgba(0,0,0,.45);
       --radius: 18px;
       --glow: 0 0 0 1px rgba(120,170,255,.25), 0 14px 40px rgba(120,170,255,.12);
@@ -32,56 +31,39 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:24px;
+      padding:32px 18px;
     }
 
-    .wrap{ width:min(1020px, 100%); }
+    .wrap{width:min(980px, 100%)}
 
     .topbar{
       display:flex;
-      align-items:center;
       justify-content:space-between;
-      gap:12px;
+      align-items:center;
       margin-bottom:14px;
-      flex-wrap:wrap;
-    }
-
-    .menu{
-      display:flex;
       gap:10px;
       flex-wrap:wrap;
     }
 
-    a.navLink, button.toggleBtn{
-      appearance:none;
-      cursor:pointer;
-      text-decoration:none;
-      color:var(--text);
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.05);
-      padding:10px 12px;
-      border-radius:12px;
+    .pill{
       display:inline-flex;
       align-items:center;
-      justify-content:center;
       gap:8px;
-      font-weight:700;
-      transition: transform .14s ease, background .14s ease, border-color .14s ease, box-shadow .14s ease;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--border);
+      color:var(--text);
+      text-decoration:none;
       font-size:14px;
+      font-weight:600;
+      box-shadow:0 10px 28px rgba(0,0,0,.25);
+      transition:transform .15s ease, background .15s ease, border-color .15s ease;
     }
-
-    a.navLink:hover, button.toggleBtn:hover{
-      transform: translateY(-1px);
-      background: rgba(120,170,255,.12);
-      border-color: rgba(120,170,255,.35);
-      box-shadow: var(--glow);
-    }
-
-    a.navLink.active,
-    button.toggleBtn.active{
-      background: rgba(120,170,255,.18);
-      border-color: rgba(120,170,255,.45);
-      box-shadow: var(--glow);
+    .pill:hover{
+      transform:translateY(-1px);
+      background:rgba(255,255,255,.07);
+      border-color:rgba(120,170,255,.30);
     }
 
     .card{
@@ -89,118 +71,122 @@
       border:1px solid var(--border);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
-      padding:24px;
+      padding:22px;
       backdrop-filter: blur(10px);
     }
 
-    h1{
-      margin:0 0 8px;
-      font-size: clamp(28px, 4vw, 38px);
-      letter-spacing:.2px;
-    }
+    h1{margin:0 0 10px; font-size:30px; letter-spacing:.2px}
 
     .sub{
-      margin:0;
+      margin:0 0 14px;
       color:var(--muted);
       line-height:1.55;
-      font-size: 15.5px;
+      font-size:15px;
     }
 
     .toggle{
       display:flex;
       gap:10px;
-      margin:16px 0 14px;
       flex-wrap:wrap;
+      margin: 0 0 14px;
     }
 
-    .view{display:none;}
-    .view.active{display:block;}
+    .toggleBtn{
+      appearance:none;
+      cursor:pointer;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      color:var(--text);
+      border-radius:12px;
+      padding:10px 14px;
+      font-weight:700;
+      transition: transform .14s ease, background .14s ease, border-color .14s ease, box-shadow .14s ease;
+    }
+
+    .toggleBtn:hover{
+      transform: translateY(-1px);
+      background: rgba(120,170,255,.12);
+      border-color: rgba(120,170,255,.35);
+      box-shadow: var(--glow);
+    }
+
+    .toggleBtn.active{
+      background: rgba(120,170,255,.18);
+      border-color: rgba(120,170,255,.45);
+      box-shadow: var(--glow);
+    }
+
+    .view{display:none}
+    .view.active{display:block}
 
     .grid{
       display:grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr 1fr;
       gap:12px;
-      margin-top:8px;
     }
 
     .section{
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.04);
-      border-radius:14px;
       padding:14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(0,0,0,.12);
     }
 
-    .section h2{
-      margin:0 0 8px;
-      font-size:18px;
-    }
+    h2{margin:0 0 8px; font-size:17px; letter-spacing:.2px}
 
     ul{
       margin:0;
       padding-left:18px;
       color:var(--muted);
-      line-height:1.55;
-      font-size:14.5px;
+      line-height:1.6;
+      font-size:14.6px;
     }
-    li{margin:6px 0;}
+    li{margin:6px 0}
 
     .featured{
       margin-top:12px;
-      border:1px solid rgba(120,170,255,.35);
-      background: rgba(120,170,255,.12);
       border-radius:14px;
+      border:1px solid rgba(120,170,255,.28);
+      background:rgba(120,170,255,.08);
       padding:14px;
     }
 
-    .featured h2{
-      margin:0 0 8px;
-      font-size:18px;
-    }
+    .featured a{color:#a8cbff; word-break:break-all}
 
-    .featured a{color:#a8cbff; word-break:break-all;}
-
-    .gradeList{
-      display:grid;
-      gap:12px;
-      margin-top:8px;
-    }
+    .gradeList{display:grid; gap:12px}
 
     .gradeItem{
-      border-left:2px solid rgba(120,170,255,.5);
-      padding:8px 0 8px 12px;
-      background: rgba(255,255,255,.03);
-      border-radius:10px;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(0,0,0,.12);
     }
 
-    .gradeItem h3{margin:0 0 6px; font-size:17px;}
-    .gradeItem p{margin:0; color:var(--muted); line-height:1.55; font-size:14.5px;}
+    .gradeItem h3{margin:0 0 6px; font-size:16px}
+    .gradeItem p{margin:0; color:var(--muted); line-height:1.62; font-size:14.6px}
 
     .foot{
-      margin-top:14px;
+      margin-top:12px;
       text-align:center;
-      color:rgba(255,255,255,.55);
-      font-size:13px;
+      color:var(--muted);
+      font-size:12.5px;
     }
 
-    @media (max-width:780px){
-      .grid{grid-template-columns:1fr;}
+    @media (max-width: 860px){
+      .grid{grid-template-columns:1fr}
     }
   </style>
 </head>
 <body>
-  <main class="wrap">
+  <div class="wrap">
     <div class="topbar">
-      <div class="menu" aria-label="Site menu">
-        <a class="navLink" href="index.html">🏠 Home</a>
-        <a class="navLink" href="portfolio.html">📌 Portfolio</a>
-        <a class="navLink active" href="achievements.html" aria-current="page">🏅 Achievements</a>
-        <a class="navLink" href="contact.html">📫 Contact</a>
-      </div>
+      <a class="pill" href="portfolio.html">← Portfolio</a>
+      <a class="pill" href="index.html">Home</a>
     </div>
 
-    <section class="card">
+    <div class="card">
       <h1>Achievements</h1>
-      <p class="sub">A quick view of competitions, leadership, honors, and activities.</p>
+      <p class="sub">Competitions, leadership, honors, and activities in one place.</p>
 
       <div class="toggle" aria-label="Achievements view toggle">
         <button class="toggleBtn active" id="categoryBtn" type="button" aria-pressed="true">By Category</button>
@@ -252,7 +238,7 @@
         </div>
 
         <aside class="featured">
-          <h2>Rubik's Cube Profile</h2>
+          <h2>Rubik’s Cube Profile</h2>
           <a href="https://www.worldcubeassociation.org/persons/2025NAKS01" target="_blank" rel="noopener noreferrer">https://www.worldcubeassociation.org/persons/2025NAKS01</a>
         </aside>
       </section>
@@ -261,11 +247,11 @@
         <div class="gradeList">
           <article class="gradeItem">
             <h3>4th Grade</h3>
-            <p>Science Olympiad winner, Odyssey of the Mind regional winner (went to states), and started running club.</p>
+            <p>Science Olympiad winner, Odyssey of the Mind regional winner (went to states), and active in running club.</p>
           </article>
           <article class="gradeItem">
             <h3>5th Grade</h3>
-            <p>Math Olympiad winner and continued activities in running club and academics.</p>
+            <p>Math Olympiad winner and continued strong academics and competition growth.</p>
           </article>
           <article class="gradeItem">
             <h3>6th Grade</h3>
@@ -273,14 +259,14 @@
           </article>
           <article class="gradeItem">
             <h3>7th Grade</h3>
-            <p>Currently participating in Math Olympiad; Noetic Math Contest honors; VML score 29/30; won SCA elections and active in clubs.</p>
+            <p>Currently participating in Math Olympiad; Noetic Math Contest honors; VML 29/30; won SCA elections and active in clubs.</p>
           </article>
         </div>
       </section>
 
       <div class="foot">More achievements will be added.</div>
-    </section>
-  </main>
+    </div>
+  </div>
 
   <script>
     const categoryBtn = document.getElementById("categoryBtn");
